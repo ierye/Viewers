@@ -1,7 +1,7 @@
 import './ToolbarRow.css';
 
 import React, { Component } from 'react';
-import { RoundedButtonGroup, ToolbarButton } from 'react-viewerbase';
+import { ExpandableToolMenu, RoundedButtonGroup, ToolbarButton } from 'react-viewerbase';
 import { commandsManager, extensionManager } from './../App.js';
 
 import ConnectedCineDialog from './ConnectedCineDialog';
@@ -140,6 +140,38 @@ class ToolbarRow extends Component {
  */
 function _getButtonComponents(toolbarButtons, activeButtons) {
   return toolbarButtons.map((button, index) => {
+    // TODO: Use Types ENUM
+    if (button.type === 'expandable' && button.buttons && button.buttons.length) {
+      const subButtons = button.buttons.map(subButton => {
+        return {
+          key: subButton.id,
+          label: subButton.label,
+          icon: subButton.icon,
+          onClick: (evt, props) => {
+            if (subButton.commandName) {
+              const options = Object.assign({ evt }, subButton.commandOptions);
+              commandsManager.runCommand(subButton.commandName, options);
+            }
+
+            // TODO: Use Types ENUM
+            // TODO: We can update this to be a `getter` on the extension to query
+            //       For the active tools after we apply our updates?
+            if (subButton.type === 'setToolActive') {
+              this.setState({
+                activeButtons: [subButton.id],
+              });
+            } else if (subButton.type === 'builtIn') {
+              this._handleBuiltIn(subButton.options);
+            }
+          }
+        };
+      });
+
+      return (
+          <ExpandableToolMenu key={button.id} buttons={subButtons} text={'More'} />
+      );
+    }
+
     // TODO: If `button.buttons`, use `ExpandedToolMenu`
     // I don't believe any extensions currently leverage this
     return (

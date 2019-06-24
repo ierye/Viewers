@@ -23,6 +23,7 @@ const TOOLBAR_BUTTON_TYPES = {
   COMMAND: 'command',
   SET_TOOL_ACTIVE: 'setToolActive',
   BUILT_IN: 'builtIn',
+  EXPANDABLE: 'expandable',
 };
 
 const definitions = [
@@ -97,6 +98,100 @@ const definitions = [
     options: {
       behavior: 'CINE',
     },
+  },
+  {
+    id: 'More',
+    label: 'More',
+    icon: 'ellipse-circle',
+    //
+    type: TOOLBAR_BUTTON_TYPES.EXPANDABLE,
+    buttons: [
+      {
+        id: 'Magnify',
+        label: 'Magnify',
+        icon: 'circle',
+        //
+        type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+        commandName: 'setToolActive',
+        commandOptions: { toolName: 'Magnify' },
+      },
+      {
+        id: 'WwwcRegion',
+        label: 'ROI Window',
+        icon: 'stop',
+        //
+        type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+        commandName: 'setToolActive',
+        commandOptions: { toolName: 'WwwcRegion' },
+      },
+      {
+        id: 'DragProbe',
+        label: 'Probe',
+        icon: 'dot-circle',
+        //
+        type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+        commandName: 'setToolActive',
+        commandOptions: { toolName: 'DragProbe' },
+      },
+      {
+        id: 'EllipticalRoi',
+        label: 'Ellipse',
+        icon: 'circle-o',
+        //
+        type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+        commandName: 'setToolActive',
+        commandOptions: { toolName: 'EllipticalRoi' },
+      },
+      {
+        id: 'RectangleRoi',
+        label: 'Rectangle',
+        icon: 'square-o',
+        //
+        type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+        commandName: 'setToolActive',
+        commandOptions: { toolName: 'RectangleRoi' },
+      },
+      {
+        id: 'Invert',
+        label: 'Invert',
+        icon: 'adjust',
+        //
+        type: TOOLBAR_BUTTON_TYPES.COMMAND,
+        commandName: 'invertViewport',
+      },
+      {
+        id: 'RotateRight',
+        label: 'Rotate Right',
+        icon: 'rotate-right',
+        //
+        type: TOOLBAR_BUTTON_TYPES.COMMAND,
+        commandName: 'rotateViewportCW',
+      },
+      {
+        id: 'FlipH',
+        label: 'Flip H',
+        icon: 'ellipse-h',
+        //
+        type: TOOLBAR_BUTTON_TYPES.COMMAND,
+        commandName: 'flipViewportHorizontal',
+      },
+      {
+        id: 'FlipV',
+        label: 'Flip V',
+        icon: 'ellipse-v',
+        //
+        type: TOOLBAR_BUTTON_TYPES.COMMAND,
+        commandName: 'flipViewportVertical',
+      },
+      {
+        id: 'Clear',
+        label: 'Clear',
+        icon: 'trash',
+        //
+        type: TOOLBAR_BUTTON_TYPES.COMMAND,
+        commandName: 'clearAnnotations',
+      },
+    ],
   },
 ];
 
